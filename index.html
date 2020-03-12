@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Transport Tip Calculator</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20%;
+        }
+
+        header {
+            margin-bottom: 5%;
+            font-family: cursive;
+            font-style: italic;
+            font-size: 40px;
+        }
+
+        .calc {
+            color: gold;
+        }
+
+        #tipCalculator {
+            box-sizing: border-box;
+            border: 1px solid gold;
+
+            box-shadow: 5px 5px 1px 5px gold;
+            padding: 10%;
+            font-size: 24px
+        }
+
+        button {
+            padding: 5%;
+            padding-left: 6%;
+            padding-top: 6%;
+            font-size: 20px;
+
+        }
+
+        button:hover {
+            color: black;
+            background-color: gold;
+            border: gold;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>Transport Tip <span class="calc">Calculator</span></header>
+    <div id="tipCalculator">
+        <form>
+            <label>Your Bill (In Naira)</label><br>
+            <input type="number" id="Amt" /><br><br>
+            <label>Performance</label><br>
+            <select id="performance">
+                <option value="0.3">Best 30%</option>
+                <option value="0.2">Good 20%</option>
+                <option value="0.15">Fair 15%</option>
+                <option value="0.1">Bad 10%</option>
+                <option value="0.05">Terrible 5%</option>
+            </select><br><br>
+
+            <label>How Many People are sharing the bill</label><br>
+            <input type="number" id="bill"><br><br>
+            <button type="button" id="calcul">Calculate</button><br><br>
+
+
+        </form>
+        <div id="totalTip">
+            <sup>#</sup><span id="tip">0.00</span>
+            <small id="each">each</small>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        function calcTip() {
+            var Amt = document.getElementById("Amt").value;
+            var performance = document.getElementById("performance").value;
+            var billPeople = document.getElementById("bill").value;
+
+            if (Amt === " " || performance === 0) {
+                alert("please enter value");
+                return;
+            }
+            if (billPeople === " " || billPeople <= 1) {
+                billPeople = 1;
+                document.getElementById("each").style.display = "none";
+            } else {
+                document.getElementById("each").style.display = "block";
+            }
+
+            var total = (Amt * performance) / billPeople;
+            total = Math.round(total * 100) / 100;
+            total = total.toFixed(2);
+            document.getElementById("totalTip").style.display = 'block';
+            document.getElementById("tip").innerHTML = total;
+        }
+
+        document.getElementById("totalTip").style.display = "none";
+        document.getElementById("each").style.display = "none";
+        document.getElementById("calcul").onclick = function() {
+            calcTip();
+        };
+    </script>
+</body>
+
+</html>
